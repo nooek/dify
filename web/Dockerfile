@@ -16,8 +16,8 @@ FROM base AS packages
 
 WORKDIR /app/web
 
-COPY package.json .
-COPY pnpm-lock.yaml .
+COPY web/package.json .
+COPY web/pnpm-lock.yaml .
 
 # if you located in China, you can use taobao registry to speed up
 # RUN pnpm install --frozen-lockfile --registry https://registry.npmmirror.com/
@@ -28,7 +28,7 @@ RUN pnpm install --frozen-lockfile
 FROM base AS builder
 WORKDIR /app/web
 COPY --from=packages /app/web/ .
-COPY . .
+COPY ../web .
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm build
@@ -51,7 +51,7 @@ ENV PM2_INSTANCES=2
 # set timezone
 ENV TZ=UTC
 RUN ln -s /usr/share/zoneinfo/${TZ} /etc/localtime \
-    && echo ${TZ} > /etc/timezone
+&& echo ${TZ} > /etc/timezone
 
 
 WORKDIR /app/web
@@ -59,14 +59,13 @@ COPY --from=builder /app/web/public ./public
 COPY --from=builder /app/web/.next/standalone ./
 COPY --from=builder /app/web/.next/static ./.next/static
 
-COPY docker/entrypoint.sh ./entrypoint.sh
-
+COPY web/docker/entrypoint.sh ./entrypoint.sh
 
 # global runtime packages
 RUN pnpm add -g pm2 \
-    && mkdir /.pm2 \
-    && chown -R 1001:0 /.pm2 /app/web \
-    && chmod -R g=u /.pm2 /app/web
+&& mkdir /.pm2 \
+&& chown -R 1001:0 /.pm2 /app/web \
+&& chmod -R g=u /.pm2 /app/web
 
 ARG COMMIT_SHA
 ENV COMMIT_SHA=${COMMIT_SHA}
