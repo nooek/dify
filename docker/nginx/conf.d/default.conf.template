@@ -6,39 +6,39 @@ server {
 
     # Rule 1: Handle application entry points (preserve /app/{id})
     location ~ ^/app/[a-f0-9-]+$ {
-      proxy_pass http://172.18.0.9172.19.0.3:5001;
+      proxy_pass http://api:5001;
       include proxy.conf;
     }
 
     # Rule 2: Handle static resource requests (remove /app/{id} prefix)
     location ~ ^/app/[a-f0-9-]+/(console/api/.*)$ {
       rewrite ^/app/[a-f0-9-]+/(.*)$ /$1 break;
-      proxy_pass http://172.18.0.9172.19.0.3:5001;
+      proxy_pass http://api:5001;
       include proxy.conf;
     }
 
     location /console/api {
-      proxy_pass http://172.18.0.9172.19.0.3:5001;
+      proxy_pass http://api:5001;
       include proxy.conf;
     }
 
     location /api {
-      proxy_pass http://172.18.0.9172.19.0.3:5001;
+      proxy_pass http://api:5001;
       include proxy.conf;
     }
 
     location /v1 {
-      proxy_pass http://172.18.0.9172.19.0.3:5001;
+      proxy_pass http://api:5001;
       include proxy.conf;
     }
 
     location /files {
-      proxy_pass http://172.18.0.9172.19.0.3:5001;
+      proxy_pass http://api:5001;
       include proxy.conf;
     }
 
     location /explore {
-      proxy_pass http://172.18.0.5:3000;
+      proxy_pass http://web:3000;
       include proxy.conf;
     }
 
@@ -49,7 +49,7 @@ server {
     }
 
     location / {
-      proxy_pass http://172.18.0.5:3000;
+      proxy_pass http://web:3000;
       include proxy.conf;
     }
 
