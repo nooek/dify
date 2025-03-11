@@ -22,7 +22,7 @@ const Activate = () => {
         <Header />
         <ActivateForm />
         <div className='px-8 py-6 text-sm font-normal text-gray-500'>
-          © {new Date().getFullYear()} Change, Inc. All rights reserved.
+          © {new Date().getFullYear()} Koality, Inc. All rights reserved.
         </div>
       </div>
     </div>
