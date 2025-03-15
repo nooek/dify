@@ -10,10 +10,17 @@ import LogoSite from '@/app/components/base/logo/logo-site'
 const Header = () => {
   const { locale, setLocaleOnClient } = useContext(I18n)
 
-  return <div className='flex items-center justify-between p-6 w-full'>
-    <LogoSite />
+  return <div style={{
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative"
+  }} className='flex items-center justify-between p-6 w-full'>
+    <LogoSite isHeader={true} />
     <Select
       value={locale}
+      isHeader={true}
       items={languages.filter(item => item.supported)}
       onChange={(value) => {
         setLocaleOnClient(value as Locale)
