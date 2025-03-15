@@ -11,7 +11,7 @@ const LogoSite: FC<LogoSiteProps> = ({ className }) => {
     <img
       src={"/logo/logo.png"}
       className={classNames("block w-[22.651px] h-[24.5px]", className)}
-      style={{ width: "100%" }}
+      style={{ width: "100%", objectFit: "contain" }}
       alt="logo"
     />
   );
