@@ -1,21 +1,20 @@
-'use client'
-import type { FC } from 'react'
-import classNames from '@/utils/classnames'
+"use client";
+import type { FC } from "react";
+import classNames from "@/utils/classnames";
 
 type LogoSiteProps = {
-  className?: string
-}
+  className?: string;
+};
 
-const LogoSite: FC<LogoSiteProps> = ({
-  className,
-}) => {
+const LogoSite: FC<LogoSiteProps> = ({ className }) => {
   return (
     <img
-      src={'/logo/logo.png'}
-      className={classNames('block w-[22.651px] h-[24.5px]', className)}
-      alt='logo'
+      src={"/logo/logo.png"}
+      className={classNames("block w-[22.651px] h-[24.5px]", className)}
+      style={{ width: "100%" }}
+      alt="logo"
     />
-  )
-}
+  );
+};
 
-export default LogoSite
+export default LogoSite;
